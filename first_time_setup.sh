@@ -1,4 +1,7 @@
 #!/usr/bin/bash
+# Author : Gajraj Singh Chouhan
+# Date : 8th August 2020
+# Inspiration : https://github.com/JohnHammond/archlinux/blob/master/bootstrap.sh
 
 # First time update
 sudo apt-get update
@@ -27,19 +30,20 @@ sudo apt-get update && sudo apt-get install sublime-text
 
 SUBLIME_PATH="~/.config/sublime-text-3/Packages/User"
 
-# TODO
-
-wget "$SUBLIME_PATH/Preferences.sublime-settings"
-echo "ewogImNtZCI6IFsiL3Vzci9iaW4vcHl0aG9uMyIsICItdSIsICIkZmlsZSJdLAogImZpbGVfcmVnZXgiOiAiXlsgXUZpbGUgXCIoLi4uPylcIiwgbGluZSAoWzAtOV0qKSIsCiAic2VsZWN0b3IiOiAic291cmNlLnB5dGhvbiIKfQ==" | base64 -d  >> "$SUBLIME_PATH/python3.sublime-build"
-
+bash -c "echo ewogImNtZCI6IFsiL3Vzci9iaW4vcHl0aG9uMyIsICItdSIsICIkZmlsZSJdLAogImZpbGVfcmVnZXgiOiAiXlsgXUZpbGUgXCIoLi4uPylcIiwgbGluZSAoWzAtOV0qKSIsCiAic2VsZWN0b3IiOiAic291cmNlLnB5dGhvbiIKfQ== | base64 -d  >> $SUBLIME_PATH/python3.sublime-build"
 
 # Install Chrome
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo dpkg -i google-chrome-stable_current_amd64.deb
 
 # Remove Junk
+# Remove Games, Mozilla Thunderbird, To-Do
 sudo apt remove aisleriot gnome-mahjongg gnome-mines gnome-sudoku 
 sudo apt-get purge thunderbird*
+sudo apt-get purge gnome-todo*
+
+# My Extensions
+sudo apt install gnome-shell-extension-autohidetopbar
 
 sudo apt-get update
 sudo apt-get upgrade
